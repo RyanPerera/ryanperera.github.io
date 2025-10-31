@@ -54,7 +54,7 @@ export default function ArtWorks({ navigateTo }: HomeProps) {
       <div className="flex items-center justify-between p-4 border-b border-cyan-700">
         <div
           className="flex items-center gap-2 cursor-pointer hover:text-cyan-100 transition-colors"
-          onClick={() => navigateTo("home")}
+          onClick={() => navigateTo?.("home")}
         >
           <FaArrowLeft className="w-4 h-4 " />
           <span>Back</span>

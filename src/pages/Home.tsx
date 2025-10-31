@@ -27,7 +27,7 @@ export default function Home({ navigateTo }: HomeProps) {
         }`}
         onMouseEnter={() => setHovered("dev")}
         onMouseLeave={() => setHovered(null)}
-        onClick={() => navigateTo("dev")}
+        onClick={() => navigateTo?.("dev")}
         animate={
           hovered === "dev"
             ? { y: [0, -2, 1, -1, 0], rotate: [0, 0.5, -0.5, 0.5, 0] }
@@ -45,7 +45,7 @@ export default function Home({ navigateTo }: HomeProps) {
         }`}
         onMouseEnter={() => setHovered("art")}
         onMouseLeave={() => setHovered(null)}
-        onClick={() => navigateTo("art")}
+        onClick={() => navigateTo?.("art")}
       >
         <GlitchText text="Art Works" active={hovered === "art" || entry} />
         <GlitchStreak active={hovered === "art"} />

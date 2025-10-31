@@ -6,7 +6,7 @@ import ArtWorks from "./pages/ArtWorks";
 
 export type Page = "home" | "dev" | "art";
 export type HomeProps = {
-  navigateTo: (p: Page) => void;
+  navigateTo?: (p: Page) => void;
 };
 export default function App() {
   const [page, setPage] = useState<Page>("home");

@@ -123,7 +123,7 @@ export default function DevWorks({ navigateTo }: HomeProps) {
           <FaGithub className="w-6 h-6 hover:text-cyan-400 transition-colors duration-300" />
         </a>
         <a
-          href="https://linkedin.com/in/ryanperera"
+          href="https://linkedin.com/in/ryan-perera"
           target="_blank"
           rel="noreferrer"
         >

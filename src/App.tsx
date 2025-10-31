@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Home from "./pages/Home";
+import DevWorks from "./pages/DevWorks";
 
-function App() {
-  const [count, setCount] = useState(0)
+type Page = "home" | "dev" | "art";
+
+export default function App() {
+  const [page, setPage] = useState<Page>("home");
+
+  const navigateTo = (p: Page) => setPage(p);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="relative w-screen h-screen overflow-hidden bg-black text-white">
+      <AnimatePresence mode="wait">
+        {page === "home" && (
+          <motion.div
+            key="home"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0"
+          >
+            <Home navigateTo={navigateTo} />
+          </motion.div>
+        )}
 
-export default App
+        {page === "dev" && (
+          <motion.div
+            key="dev"
+            initial={{ opacity: 0, x: 200 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -200 }}
+            transition={{ duration: 5, ease: "easeInOut" }} // slower
+            className="absolute inset-0"
+          >
+            <DevWorks navigateTo={navigateTo} />
+          </motion.div>
+        )}
+
+        {page === "art" && (
+          <motion.div
+            key="art"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 100 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0"
+          >
+            <DevWorks navigateTo={navigateTo} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

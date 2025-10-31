@@ -1,12 +1,11 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaInstagram, FaTiktok } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
-// Example video imports (replace with your actual video files)
 import video1 from "@/assets/videos/distortionworld_final.mp4";
 import video2 from "@/assets/videos/Larvitar.mp4";
 import { FaXTwitter } from "react-icons/fa6";
+import type { HomeProps } from "@/App";
 
 const artProjects = [
   {
@@ -19,8 +18,7 @@ const artProjects = [
   },
 ];
 
-export default function ArtWorks() {
-  const navigate = useNavigate();
+export default function ArtWorks({ navigateTo }: HomeProps) {
   const [visibleCount, setVisibleCount] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const videoRefs = useRef<HTMLVideoElement[]>([]);
@@ -51,68 +49,66 @@ export default function ArtWorks() {
   };
 
   return (
-    <div className="relative flex flex-col w-full bg-black text-cyan-400 font-mono">
+    <div className="w-full h-screen flex flex-col text-cyan-400 font-mono">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-cyan-700">
         <div
           className="flex items-center gap-2 cursor-pointer hover:text-cyan-100 transition-colors"
-          onClick={() => navigate("/")}
+          onClick={() => navigateTo("home")}
         >
           <FaArrowLeft className="w-4 h-4 " />
           <span>Back</span>
         </div>
         <span>ryanperera@portfolio:~/artworks$</span>
       </div>
-
       {/* Video grid fills remaining space */}
-      <div className="flex-1 flex flex-col p-6 bg-gray-800/20">
-        <div className="flex flex-1 flex-wrap justify-center items-stretch gap-6 overflow-hidden">
-          {artProjects.slice(0, visibleCount).map((proj, index) => (
-            <motion.div
-              key={index}
-              className="relative flex-1 aspect-9/16 min-w-[300px] max-w-[600px] flex flex-col shadow-2xl transition-all duration-500"
-              initial={{ opacity: 0, y: 50, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={() => handleMouseLeave(index)}
-              // Handle touch events for mobile interaction
-              onTouchStart={() => handleMouseEnter(index)}
-              onTouchEnd={() => handleMouseLeave(index)}
-              onTouchCancel={() => handleMouseLeave(index)}
+      <div className="flex justify-center flex-wrap items-start overflow-y-auto">
+        {artProjects.slice(0, visibleCount).map((proj, index) => (
+          <motion.div
+            key={index}
+            className="relative  w-auto h-[calc(100vh-8rem)] transition-all duration-500"
+            initial={{ opacity: 0, y: 50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            onMouseEnter={() => handleMouseEnter(index)}
+            onMouseLeave={() => handleMouseLeave(index)}
+            // Handle touch events for mobile interaction
+            onTouchStart={() => handleMouseEnter(index)}
+            onTouchEnd={() => handleMouseLeave(index)}
+            onTouchCancel={() => handleMouseLeave(index)}
+          >
+            <video
+              ref={(el) => {
+                if (el) videoRefs.current[index] = el;
+              }}
+              src={proj.video}
+              className="h-full w-auto object-contain"
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              style={{ pointerEvents: "none" }}
+              onError={(e) => console.error("Video load error:", e)}
+            />
+            {/* Info Overlay */}
+            <div
+              className={`absolute inset-0 flex items-center justify-center p-4 text-center transition-opacity duration-300 ${
+                hoveredIndex === index ? "opacity-0" : "opacity-100"
+              }`}
             >
-              <video
-                ref={(el) => (videoRefs.current[index] = el)}
-                src={proj.video}
-                className="flex-1 w-full h-full object-cover bg-black"
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                style={{ pointerEvents: "none" }}
-                onError={(e) => console.error("Video load error:", e)}
-              />
+              <span className="text-xl font-extrabold tracking-wider text-cyan-300 transform transition-transform duration-300 ease-out">
+                {proj.title}
+              </span>
+            </div>
 
-              {/* Info Overlay */}
-              <div
-                className={`absolute inset-0 flex items-center justify-center p-4 bg-gray-900/90 text-center transition-opacity duration-300 ${
-                  hoveredIndex === index ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                <span className="text-xl font-extrabold tracking-wider text-cyan-300 transform transition-transform duration-300 ease-out">
-                  {proj.title}
-                </span>
-              </div>
-
-              {/* Dark overlay when not hovered */}
-              <div
-                className={`absolute inset-0 bg-black transition-opacity duration-200 ${
-                  hoveredIndex === index ? "opacity-0" : "opacity-50"
-                }`}
-              />
-            </motion.div>
-          ))}
-        </div>
+            {/* Dark overlay when not hovered */}
+            <div
+              className={`absolute inset-0 bg-black transition-opacity duration-200 ${
+                hoveredIndex === index ? "opacity-0" : "opacity-50"
+              }`}
+            />
+          </motion.div>
+        ))}
       </div>
       <div className="absolute bottom-6 right-6 flex flex-col gap-4 z-40">
         <a

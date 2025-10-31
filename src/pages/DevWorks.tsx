@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FaGithub, FaArrowLeft, FaLinkedin } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import ciphercollector from "@/assets/ciphercollector.png";
 import shouldirip from "@/assets/shouldirip.png";
 import foodhunterzoro from "@/assets/foodhunterzoro.png";
+import type { HomeProps } from "@/App";
 
 const projectsData = [
   {
@@ -45,8 +45,7 @@ const projectsData = [
   },
 ];
 
-export default function DevWorks() {
-  const navigate = useNavigate();
+export default function DevWorks({ navigateTo }: HomeProps) {
   const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
@@ -62,7 +61,7 @@ export default function DevWorks() {
       <div className="flex items-center justify-between p-4 border-b border-cyan-700 sticky top-0 bg-black z-10">
         <div
           className="flex items-center gap-2 cursor-pointer hover:text-cyan-100 transition-colors"
-          onClick={() => navigate("/")}
+          onClick={() => navigateTo("home")}
         >
           <FaArrowLeft className="w-4 h-4 " />
           <span>Back</span>

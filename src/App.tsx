@@ -2,9 +2,12 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Home from "./pages/Home";
 import DevWorks from "./pages/DevWorks";
+import ArtWorks from "./pages/ArtWorks";
 
-type Page = "home" | "dev" | "art";
-
+export type Page = "home" | "dev" | "art";
+export type HomeProps = {
+  navigateTo: (p: Page) => void;
+};
 export default function App() {
   const [page, setPage] = useState<Page>("home");
 
@@ -31,7 +34,7 @@ export default function App() {
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -200 }}
-            transition={{ duration: 5, ease: "easeInOut" }} // slower
+            transition={{ duration: 0.8, ease: "easeInOut" }} // slower
             className="absolute inset-0"
           >
             <DevWorks navigateTo={navigateTo} />
@@ -47,7 +50,7 @@ export default function App() {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="absolute inset-0"
           >
-            <DevWorks navigateTo={navigateTo} />
+            <ArtWorks navigateTo={navigateTo} />
           </motion.div>
         )}
       </AnimatePresence>

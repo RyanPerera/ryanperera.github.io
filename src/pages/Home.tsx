@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { FaGithub, FaLinkedin, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { useNavigate } from "react-router-dom";
+import type { HomeProps } from "@/App";
 
-export default function Home() {
-  const navigate = useNavigate();
+export default function Home({ navigateTo }: HomeProps) {
   const [hovered, setHovered] = useState<null | "dev" | "art">(null);
   const [entry, setEntry] = useState(true);
 
@@ -29,7 +27,7 @@ export default function Home() {
         }`}
         onMouseEnter={() => setHovered("dev")}
         onMouseLeave={() => setHovered(null)}
-        onClick={() => navigate("/dev")}
+        onClick={() => navigateTo("dev")}
         animate={
           hovered === "dev"
             ? { y: [0, -2, 1, -1, 0], rotate: [0, 0.5, -0.5, 0.5, 0] }
@@ -47,7 +45,7 @@ export default function Home() {
         }`}
         onMouseEnter={() => setHovered("art")}
         onMouseLeave={() => setHovered(null)}
-        onClick={() => navigate("/art")}
+        onClick={() => navigateTo("art")}
       >
         <GlitchText text="Art Works" active={hovered === "art" || entry} />
         <GlitchStreak active={hovered === "art"} />

@@ -85,15 +85,6 @@ export default function ArtWorks({ navigateTo }: HomeProps) {
     }
   };
 
-  const handleTouchStart = (index: number) => {
-    setSelectedVideoIndex(selectedVideoIndex === index ? null : index);
-    if (selectedVideoIndex !== index) {
-      handleVideoPlay(index);
-    } else {
-      handleVideoPause(index);
-    }
-  };
-
   const closeExpandedVideo = () => {
     handleVideoPause(selectedVideoIndex!);
     setSelectedVideoIndex(null);

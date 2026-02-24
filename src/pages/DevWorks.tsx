@@ -9,6 +9,7 @@ import {
 import ciphercollector from "@/assets/ciphercollector.png";
 import shouldirip from "@/assets/shouldirip.png";
 import foodhunterzoro from "@/assets/foodhunterzoro.png";
+import fehplanner from "@/assets/fehplanner.png";
 import type { HomeProps } from "@/App";
 
 interface Project {
@@ -17,11 +18,25 @@ interface Project {
   stack: string;
   description: string[];
   link: string;
-  github: string;
+  github?: string;
   img: string;
 }
 
 const PROJECTS: Project[] = [
+  {
+    title: "Feh Inheritance Planner",
+    subtitle: "Fire Emblem Heroes Inheritance Chain Planner",
+    stack: "Next.js, Supabase, Tailwind CSS",
+    description: [
+      "Built a site to help users plan inheritance chains for the Fire Emblem Heroes mobile game.",
+      "Used ShadCN components throughout for quick development and a consistent interface.",
+      "Implemented an AI planner with OpenAI's API to thoughtfully optimize inheritance outcomes.",
+      "Created an algorithmic planner that finds the best inheritance path based on targets and available units.",
+      "Built a custom unit and skill database with Supabase as a Backend-as-a-Service.",
+    ],
+    link: "https://feh-inheritance-planner.vercel.app/",
+    img: fehplanner,
+  },
   {
     title: "ShouldIRip?",
     subtitle: "Pokémon TCG Decision Helper",
@@ -164,15 +179,17 @@ export default function DevWorks({ navigateTo }: HomeProps) {
 
                   {/* Action Buttons */}
                   <div className="flex items-center gap-4 mt-6 pt-6 border-t border-slate-100">
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-2 px-5 py-3 rounded-md bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-200 text-base font-medium"
-                    >
-                      <FaGithub className="w-5 h-5" />
-                      <span>GitHub</span>
-                    </a>
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-2 px-5 py-3 rounded-md bg-slate-900 text-white hover:bg-slate-800 transition-colors duration-200 text-base font-medium"
+                      >
+                        <FaGithub className="w-5 h-5" />
+                        <span>GitHub</span>
+                      </a>
+                    )}
                     <a
                       href={project.link}
                       target="_blank"

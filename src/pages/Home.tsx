@@ -255,7 +255,6 @@ function GlitchText({
   size?: "large" | "medium";
   color?: "cyan" | "purple";
 }) {
-  const [flicker, setFlicker] = useState(false);
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
   const sizeClasses =
@@ -266,8 +265,6 @@ function GlitchText({
 
   useEffect(() => {
     if (active) {
-      setFlicker(true);
-
       const interval = setInterval(() => {
         setPos({
           x: (Math.random() - 0.5) * 12,
@@ -277,7 +274,6 @@ function GlitchText({
 
       return () => clearInterval(interval);
     } else {
-      setFlicker(false);
       setPos({ x: 0, y: 0 });
     }
   }, [active]);

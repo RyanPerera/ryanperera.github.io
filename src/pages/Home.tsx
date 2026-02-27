@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaLinkedin, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import type { HomeProps } from "@/App";
+import { useNavigate } from "react-router-dom";
 
-export default function Home({ navigateTo }: HomeProps) {
+export default function Home() {
+  const navigate = useNavigate();
   const [hovered, setHovered] = useState<null | "dev" | "art">(null);
   const [entry, setEntry] = useState(true);
 
@@ -98,7 +99,7 @@ export default function Home({ navigateTo }: HomeProps) {
           }`}
           onMouseEnter={() => setHovered("dev")}
           onMouseLeave={() => setHovered(null)}
-          onClick={() => navigateTo?.("dev")}
+          onClick={() => navigate("/dev")}
           animate={hovered === "dev" ? { scale: 1.05 } : { scale: 1 }}
         >
           {/* Background decoration */}
@@ -143,7 +144,7 @@ export default function Home({ navigateTo }: HomeProps) {
           }`}
           onMouseEnter={() => setHovered("art")}
           onMouseLeave={() => setHovered(null)}
-          onClick={() => navigateTo?.("art")}
+          onClick={() => navigate("/art")}
           animate={hovered === "art" ? { scale: 1.05 } : { scale: 1 }}
         >
           {/* Background decoration */}

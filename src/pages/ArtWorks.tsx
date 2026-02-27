@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaArrowLeft, FaInstagram, FaTiktok } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import type { HomeProps } from "@/App";
+import { useNavigate } from "react-router-dom";
 
 import video1 from "@/assets/videos/crystal.mp4";
 import video2 from "@/assets/videos/distortionworld_final.mp4";
@@ -29,7 +29,8 @@ const ART_PROJECTS: ArtProject[] = [
   },
 ];
 
-export default function ArtWorks({ navigateTo }: HomeProps) {
+export default function ArtWorks() {
+  const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(0);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [selectedVideoIndex, setSelectedVideoIndex] = useState<number | null>(
@@ -96,7 +97,7 @@ export default function ArtWorks({ navigateTo }: HomeProps) {
       <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-sm shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <button
-            onClick={() => navigateTo?.("home")}
+            onClick={() => navigate("/")}
             className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors duration-200 font-medium"
             aria-label="Back to home"
           >

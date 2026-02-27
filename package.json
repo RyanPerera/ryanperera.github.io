@@ -1,7 +1,7 @@
 {
   "name": "ryanperera-portfolio-v2",
   "private": true,
-  "homepage": "https://ryanperera.github.io/oldportfolio",
+  "homepage": "https://ryanperera.github.io",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

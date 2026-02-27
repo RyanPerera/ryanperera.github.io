@@ -6,11 +6,11 @@ import {
   FaLinkedin,
   FaExternalLinkAlt,
 } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import ciphercollector from "@/assets/ciphercollector.png";
 import shouldirip from "@/assets/shouldirip.png";
 import foodhunterzoro from "@/assets/foodhunterzoro.png";
 import fehplanner from "@/assets/fehplanner.png";
-import type { HomeProps } from "@/App";
 
 interface Project {
   title: string;
@@ -77,7 +77,8 @@ const PROJECTS: Project[] = [
   },
 ];
 
-export default function DevWorks({ navigateTo }: HomeProps) {
+export default function DevWorks() {
+  const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(0);
 
   useEffect(() => {
@@ -93,7 +94,7 @@ export default function DevWorks({ navigateTo }: HomeProps) {
       <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-sm shadow-sm flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <button
-            onClick={() => navigateTo?.("home")}
+            onClick={() => navigate("/")}
             className="flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors duration-200 font-medium"
             aria-label="Back to home"
           >

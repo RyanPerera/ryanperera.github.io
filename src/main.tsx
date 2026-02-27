@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import DevWorks from "./pages/DevWorks"; // your new retro dev page
 import ArtWorks from "./pages/ArtWorks"; // optional if you have an Art page
+import Resume from "./pages/Resume";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/" element={<App />} />
         <Route path="/dev" element={<DevWorks />} />
         <Route path="/art" element={<ArtWorks />} />
+        <Route path="/resume" element={<Resume />} />
+        <Route path="/homepage/resume" element={<Resume />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
